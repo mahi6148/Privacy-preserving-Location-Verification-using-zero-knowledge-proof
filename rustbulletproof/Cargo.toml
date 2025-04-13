@@ -1,0 +1,23 @@
+[package]
+name = "rustbulletproof"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bulletproofs = "4.0.0"
+curve25519-dalek-ng = "4.1.0"
+merlin = "3.0.0"
+rand = "0.8.5"
+geo-types = "0.7.9"
+anyhow = "1.0.71"
+serde = { version = "1.0", features = ["derive"] }
+bincode = "1.3"
+jni = "0.19"
+base64 = "0.21"
+
+
+
+[lib]
+name = "zkp_proximity"
+crate-type = ["cdylib"]  # For FFI with windows
+# crate-type = ["dylib"] # For FFI with android

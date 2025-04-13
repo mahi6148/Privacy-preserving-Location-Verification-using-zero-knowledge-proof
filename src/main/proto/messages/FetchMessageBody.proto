@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.messages";
+option java_outer_classname = "FetchMessageBodyProto";
+
+message FetchSessionsRequestBody{
+  string userId = 1;
+}
+
+message FetchSessionsResponseBody{
+  repeated Session sessions=1;
+}
+
+message Session{
+  int32 sessionId =1;
+  string sessionName = 2;
+  google.protobuf.Timestamp startedAt =3;
+  google.protobuf.Timestamp endedAt = 4;
+  int32 locationLimit =5;
+  int32 AttendancePercentage = 6;
+}
+
+message FetchAttendanceRecordsRequest{
+  string userId =1;
+  string sessionId =2;
+}

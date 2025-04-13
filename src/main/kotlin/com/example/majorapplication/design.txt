@@ -1,0 +1,78 @@
+I understand you're building a live attendance tracking system that monitors user presence based on their location range. Let me help you design the backend and database structure for this application.
+
+### Database Design
+
+I recommend a relational database structure with these main tables:
+
+1. **Users Table**
+   ```
+   - user_id (Primary Key) (uuid)
+   - username
+   - email
+   - registered on
+   ```
+
+2. **Attendance Records Table**
+   ```
+   - record_id (Primary Key)
+   - user_id (Foreign Key)
+   - timestamp
+   - status (PRESENT, ABSENT, OFFLINE)
+   - location_value (the range value you mentioned)
+   - session_id (to group records by class/session)
+   ```
+
+3. **Sessions Table** (optional, for organizing attendance by class/meeting)
+   ```
+   - session_id (Primary Key)
+   - session_name
+   - start_time
+   - end_time
+   - location_limit (max acceptable distance value)
+   ```
+
+### Backend Architecture
+
+For your polling-based attendance system, Spring WebFlux would be a good choice if you expect:
+- High concurrency (many users sending attendance pings simultaneously)
+- Need for real-time updates and monitoring
+- Better resource utilization under high load
+
+Here's how you could implement this:
+
+1. Create a reactive endpoint that accepts location pings:
+   ```java
+   @PostMapping("/attendance/ping")
+   public Mono<AttendanceResponse> recordAttendance(@RequestBody AttendanceRequest request) {
+       // Extract user ID and location from request
+       // Check if location is within range (0-300)
+       // Record appropriate status
+       // Return confirmation
+   }
+   ```
+
+2. Implement logic to handle the three states:
+   - User pings with location in range (0-300) → PRESENT
+   - User pings with location out of range → ABSENT
+   - No ping received within expected interval → OFFLINE
+
+3. For the "OFFLINE" detection, you'll need a scheduled task that runs periodically to check for users who haven't sent a ping recently:
+   ```java
+   @Scheduled(fixedRate = 60000) // Run every minute
+   public void checkForOfflineUsers() {
+       // Find users without a recent ping
+       // Mark them as OFFLINE
+   }
+   ```
+
+### Considerations
+
+1. **Polling frequency**: Determine the optimal polling interval based on battery considerations and attendance accuracy needs.
+
+2. **Data aggregation**: Consider whether you need detailed ping-by-ping records or just summarized attendance for reporting.
+
+3. **Performance optimization**: For large deployments, implement caching and database indexing.
+
+4. **Security**: Ensure user authentication and prevent spoofing of location data.
+
+Would you like me to elaborate on any specific part of this design, such as the WebFlux implementation, database schema details, or authentication?

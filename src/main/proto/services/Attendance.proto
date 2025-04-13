@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.example.majorapplication;
+
+import "messages/AttendanceMessageBody.proto";
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.services";
+option java_outer_classname = "AttendanceProto";
+
+service Attendance{
+  rpc checkAttendance(AttendanceMessageRequestBody) returns (AttendanceMessageResponseBody);
+}

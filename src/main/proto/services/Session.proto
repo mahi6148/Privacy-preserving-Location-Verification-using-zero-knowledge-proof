@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package com.example.majorapplication;
+
+import "messages/SessionMessageBody.proto";
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.services";
+option java_outer_classname = "SessionProto";
+
+service Session{
+  rpc requestSession(SessionMessageRequestBody) returns (SessionMessageResponseBody);
+  rpc StreamToSession(stream StreamSessionRequest) returns (stream StreamSessionResponse);
+}

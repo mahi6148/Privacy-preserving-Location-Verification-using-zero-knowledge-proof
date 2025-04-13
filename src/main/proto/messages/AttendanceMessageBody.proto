@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package com.example.majorapplication;
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.messages";
+option java_outer_classname = "AttendanceMessageBodyProto";
+
+message ProofData{
+    bytes proofBytes = 1;
+    bytes ristrettoBytes = 2;
+}
+
+message AttendanceMessageRequestBody{
+  string UserId = 1;
+  ProofData data = 2;
+  string sessionId = 3;
+  google.protobuf.Timestamp recordedTimestamp = 4;
+}
+
+message AttendanceMessageResponseBody{
+  string attendanceStatus=1;
+}
+
+
+
