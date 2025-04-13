@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.example.majorapplication;
+
+import "messages/FetchMessageBody.proto";
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.services";
+option java_outer_classname = "FetchSessionProto";
+
+service FetchSession{
+  rpc fetchUserSessions(FetchSessionsRequestBody) returns(FetchSessionsResponseBody);
+}

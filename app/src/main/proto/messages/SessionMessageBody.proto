@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package com.example.majorapplication;
+
+import "messages/AttendanceMessageBody.proto";
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.messages";
+option java_outer_classname = "SessionMessageBodyProto";
+
+message SessionMessageRequestBody{
+  string userId = 1;
+  google.protobuf.Timestamp sessionRequestedAt = 2;
+  string sessionName =3;
+}
+
+message SessionMessageResponseBody{
+  int32 sessionId = 1;
+  double longitude = 2;
+  double latitude = 3;
+  uint32 locationLimit = 4;
+  string sessionName = 5;
+}
+
+message StreamSessionRequest{
+  string UserId = 1;
+  ProofData data = 2;
+  int32 sessionId = 3;
+  google.protobuf.Timestamp recordedTimestamp = 4;
+}
+
+message StreamSessionResponse{
+  VerificationResultType result = 1;
+  ErrorType error = 2;
+}
+
+enum ErrorType {
+  JAVA_TO_RUST_CONVERSION_ERROR = 0;
+  EMPTY_VECTORS_ERROR = 1;
+  DESERIALIZATION_ERROR = 2;
+  PROOF_ERROR = 3;
+}
+
+enum VerificationResultType {
+  PRESENT = 0;
+  ABSENT = 1;
+  ERROR = 2;
+}

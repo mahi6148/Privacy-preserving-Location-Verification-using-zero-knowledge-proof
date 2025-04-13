@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false" >Major Application</string>
+    <string name="web_client_id" translatable="false" >832722543335-datoa3ktg9qoifapi8sfolle7qak8jbb.apps.googleusercontent.com</string>
+    <string name="serverip" translatable="false">192.168.241.77</string>
+</resources>

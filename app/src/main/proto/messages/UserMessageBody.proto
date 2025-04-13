@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.example.majorapplication;
+
+option java_multiple_files = true;
+option java_package = "com.example.majorapplication.messages";
+option java_outer_classname = "UserMessageBodyProto";
+
+message UserMessageRequestBody{
+  string userId = 1;
+  string userName = 2;
+  string email = 3;
+}
+
+message UserMessageResponseBody{
+  string message =1;
+}
