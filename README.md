@@ -1,4 +1,4 @@
-# This branch contains the code to run the Android application.
+# This branch contains the code to run the Spring Boot application.
 
 ## instruction :
 1. install rust.
